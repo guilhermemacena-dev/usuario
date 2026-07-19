@@ -66,13 +66,11 @@ public class UsuarioConverter {
     public List<EnderecoDTO> paraListaEnderecoDTO(List<Endereco> enderecoDTOS){
 
         return  enderecoDTOS.stream().map(this::paraEndereco).toList();
-
     }
 
     public List<TelefoneDTO> paraListaTelefonesDTO(List<Telefone> telefoneDTOS){
 
         return telefoneDTOS.stream().map(this::paraTelefone).toList();
-
     }
 
     public EnderecoDTO paraEndereco(Endereco enderecoDTO){

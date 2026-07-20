@@ -4,6 +4,8 @@ import com.guilherme.usuario.business.UsuarioService;
 import com.guilherme.usuario.business.dto.EnderecoDTO;
 import com.guilherme.usuario.business.dto.TelefoneDTO;
 import com.guilherme.usuario.business.dto.UsuarioDTO;
+import com.guilherme.usuario.infrastructure.entity.Endereco;
+import com.guilherme.usuario.infrastructure.entity.Telefone;
 import com.guilherme.usuario.infrastructure.entity.Usuario;
 import com.guilherme.usuario.infrastructure.security.JwtUtil;
 import lombok.RequiredArgsConstructor;
@@ -64,11 +66,27 @@ public class UsuarioController {
                                                             @RequestParam("id") Long id) {
         return  ResponseEntity.ok(usuarioService.atualizarEndereco(id, dto));
 
-       }       @PutMapping("/telefone")
+       }
+
+       @PutMapping("/telefone")
         public ResponseEntity<TelefoneDTO> atualizaTelefone(@RequestBody TelefoneDTO dto,
                                                             @RequestParam("id") Long id) {
         return  ResponseEntity.ok(usuarioService.atualizaTelefone(id, dto));
 
        }
+
+       @PostMapping("/endereco")
+       public ResponseEntity<EnderecoDTO> cadastraEndereco(@RequestBody EnderecoDTO dto,
+                                                           @RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(usuarioService.cadastraEndereco(token, dto));
+
+       }
+
+    @PostMapping("/telefone")
+    public ResponseEntity<TelefoneDTO> cadastraTelefone(@RequestBody TelefoneDTO dto,
+                                                        @RequestHeader("Authorization") String token) {
+     return ResponseEntity.ok(usuarioService.cadastraTelefone(token, dto));
+
+    }
 
 }

@@ -35,7 +35,7 @@ public class UsuarioService {
         usuarioDTO.setSenha(passwordEncoder.encode(usuarioDTO.getSenha()));
         Usuario usuario = usuarioConverter.paraUsuario(usuarioDTO);
         return usuarioConverter.paraUsuarioDTO(
-                usuarioRepository.save(usuario)
+                usuarioRepository.save(usuario) //Spring chama a implementação interna do JpaRepository ou do MongoRepository e envia os dados ao banco
         );
     }
 
@@ -45,7 +45,7 @@ public class UsuarioService {
             boolean existe = verificaEmailExistente(email);
 
             if(existe){
-                throw new ClassCastException("Email já cadastrado" + email);
+                throw new ConflictException("Email já cadastrado" + email);
             }
 
         } catch (ConflictException e){

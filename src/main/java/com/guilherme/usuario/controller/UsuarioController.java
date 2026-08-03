@@ -1,9 +1,12 @@
 package com.guilherme.usuario.controller;
 
 import com.guilherme.usuario.business.UsuarioService;
+import com.guilherme.usuario.business.ViaCepService;
 import com.guilherme.usuario.business.dto.EnderecoDTO;
 import com.guilherme.usuario.business.dto.TelefoneDTO;
 import com.guilherme.usuario.business.dto.UsuarioDTO;
+import com.guilherme.usuario.infrastructure.clients.ViaCepClient;
+import com.guilherme.usuario.infrastructure.clients.ViaCepDTO;
 import com.guilherme.usuario.infrastructure.security.JwtUtil;
 import com.guilherme.usuario.infrastructure.security.SecurityConfig;
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,6 +30,7 @@ public class UsuarioController {
     private final UsuarioService usuarioService;
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
+    private final ViaCepService viaCepService;
 
 
     @PostMapping
@@ -131,6 +135,11 @@ public class UsuarioController {
                                                         @RequestHeader("Authorization") String token) {
         return ResponseEntity.ok(usuarioService.cadastraTelefone(token, dto));
 
+    }
+
+    @GetMapping("/endereco/{cep}")
+    public  ResponseEntity<ViaCepDTO> buscarDadosCep(@PathVariable("cep") String cep){
+        return ResponseEntity.ok(viaCepService.buscarDadosEndereco(cep));
     }
 
 }

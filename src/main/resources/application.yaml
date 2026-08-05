@@ -16,3 +16,6 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+
+viacep:
+  url: https://viacep.com.br
